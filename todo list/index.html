@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>Todo List</title>
+</head>
+
+<body>
+
+	<div id="app">
+		<div class="div1">
+			<div class="title">Todo List</div>
+			<div class="desc">Get thisngs done, one item at a time.</div>
+		</div>
+		<div class="div2">
+			<ul>
+				<li v-for="task in tasks" :class="{'crosout': task.isCompleted}">
+					<input maxlength="36" class="rename" type="text" v-if="task.isEditing" @keyup.enter="editTask(task.text)" v-model="editValue">
+					<div v-else @click="changeEditing(task.text)">{{task.text}}</div>
+					<div class="grid">
+						<a @click="task.clicks = !task.clicks" v-on:click="task.isCompleted = !task.isCompleted" :class="{'checkbox-click': task.clicks}" href="#"><i class="fas fa-check"></i></a>
+						<i @click="removeTask(task.text)" class="fas fa-trash"></i>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="div3">
+			<div class="div3-title">Add to the todo list</div>
+			<div>
+				<input maxlength="36" @keyup.enter="addTask" v-model="currentTask" type="text" placeholder="Add">
+				<a v-on:click="addTask" href="#" class="btn">ADD ITEM</a>
+			</div>
+		</div>
+	</div>
+	<div class="block"></div>
+
+	<script src="https://kit.fontawesome.com/08b62fe148.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script src="js/script.js"></script>
+</body>
+
+</html>
